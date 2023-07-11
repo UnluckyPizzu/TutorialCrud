@@ -53,7 +53,28 @@ public class TutorialServiceImpl implements TutorialService {
 	@Transactional
 	@Override
 	public Tutorial insertTutorial(Tutorial tutorial) {
-		return tutorialRepository.insertTutorial(tutorial);
+		return tutorialRepository.save(tutorial);
+	}
+
+
+	@Transactional
+	@Override
+	public Tutorial updateTutorial(Tutorial tutorial) {
+		return tutorialRepository.updateTutorial(tutorial);
+	}
+
+
+	@Transactional
+	@Override
+	public int deleteTutorialById(long id) {
+		return tutorialRepository.deleteById(id);
+	}
+
+
+	@Transactional
+	@Override
+	public int deleteAllTutorial() {
+		return tutorialRepository.deleteAllTutorial();
 	}
 	
 	

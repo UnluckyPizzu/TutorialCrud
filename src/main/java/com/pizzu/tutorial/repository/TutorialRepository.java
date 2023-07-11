@@ -10,4 +10,7 @@ public interface TutorialRepository {
 	List<Tutorial> getAllPublishedTutorial();
 	List<Tutorial> getTutorialByTitle(String name);
 	Tutorial insertTutorial(Tutorial tutorial);
+	Tutorial updateTutorial(Tutorial tutorial);
+	int deleteById(long id);
+	int deleteAllTutorial();
 }

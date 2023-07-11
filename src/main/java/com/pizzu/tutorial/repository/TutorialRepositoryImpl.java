@@ -60,6 +60,25 @@ public class TutorialRepositoryImpl implements TutorialRepository {
 		return tutorial;
 	}
 
+	@Override
+	public Tutorial updateTutorial(Tutorial tutorial) {
+		return entityManager.merge(tutorial);
+	}
+
+	@Override
+	public int deleteById(long id) {
+		Query deleteQuery = entityManager.createQuery("delete from Tutorial where id = ?0");
+		deleteQuery.setParameter(0, id);
+		return deleteQuery.executeUpdate();
+		
+	}
+
+	@Override
+	public int deleteAllTutorial() {
+		Query deleteQuery = entityManager.createQuery("delete from Tutorial");
+		return deleteQuery.executeUpdate();
+	}
+
 	
 	
 }

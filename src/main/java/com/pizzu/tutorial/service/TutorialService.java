@@ -10,4 +10,7 @@ public interface TutorialService {
 	public List<Tutorial> findAllPublishedTutorial();
 	public List<Tutorial> findTutorialByTitle(String name);
 	public Tutorial insertTutorial(Tutorial tutorial);
+	public Tutorial updateTutorial(Tutorial tutorial);
+	public int deleteTutorialById(long id);
+	public int deleteAllTutorial();
 }
