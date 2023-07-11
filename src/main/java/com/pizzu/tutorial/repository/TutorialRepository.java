@@ -7,4 +7,7 @@ import com.pizzu.tutorial.model.Tutorial;
 public interface TutorialRepository {
 	List<Tutorial> getAllTutorial();
 	Tutorial getTutorialById(long id);
+	List<Tutorial> getAllPublishedTutorial();
+	List<Tutorial> getTutorialByTitle(String name);
+	Tutorial insertTutorial(Tutorial tutorial);
 }

@@ -37,7 +37,29 @@ public class TutorialRepositoryImpl implements TutorialRepository {
 		
 		return tutorial;
 	}
-	
-	
 
+	@Override
+	public List<Tutorial> getAllPublishedTutorial() {
+		Query getQuery = entityManager.createQuery("from Tutorial where published = true");
+		List<Tutorial> tutorials = getQuery.getResultList();
+		return tutorials;
+	}
+
+	@Override
+	public List<Tutorial> getTutorialByTitle(String name) {
+		Query getQuery = entityManager.createQuery("from Tutorial where title like ?0");
+		getQuery.setParameter(0, "%" + name + "%");
+		List<Tutorial> tutorials = getQuery.getResultList();
+		
+		return tutorials;
+	}
+
+	@Override
+	public Tutorial insertTutorial(Tutorial tutorial) {
+		entityManager.persist(tutorial); 
+		return tutorial;
+	}
+
+	
+	
 }
