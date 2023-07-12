@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pizzu.tutorial.model.Tutorial;
+import com.pizzu.tutorial.model.TutorialSpecification;
 
 @Repository
 public class TutorialRepositoryImpl implements TutorialRepository {
@@ -73,6 +74,14 @@ public class TutorialRepositoryImpl implements TutorialRepository {
 	public int deleteAllTutorial() {
 		Query deleteQuery = entityManager.createQuery("delete from Tutorial");
 		return deleteQuery.executeUpdate();
+	}
+
+	@Override
+	public Tutorial insertSpecification(long id, TutorialSpecification specification) {
+		Tutorial tutorial = entityManager.find(Tutorial.class, id);
+		//tutorial.setSpecification(specification);
+		entityManager.merge(tutorial);
+		return tutorial;
 	}
 
 	

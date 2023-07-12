@@ -25,5 +25,9 @@ public class Tutorial {
 	@Column(nullable = false)
 	private Boolean published;
 
-	
+	/*
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "tutorial_id")
+	private TutorialSpecification specification;
+	*/
 }

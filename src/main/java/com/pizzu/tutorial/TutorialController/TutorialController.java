@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pizzu.tutorial.model.Tutorial;
+import com.pizzu.tutorial.model.TutorialSpecification;
 import com.pizzu.tutorial.service.TutorialService;
 
 @RestController
@@ -59,6 +60,11 @@ public class TutorialController {
 	@PostMapping
 	public ResponseEntity<Tutorial> postTutorial(@RequestBody Tutorial tutorial) {
 		return new ResponseEntity<Tutorial>(tutorialService.insertTutorial(tutorial), HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Tutorial> postTutorial(@PathVariable long id, @RequestBody TutorialSpecification specification) {
+		return new ResponseEntity<Tutorial>(tutorialService.insertSpecification(id, specification), HttpStatus.CREATED);
 	}
 	
 	@PutMapping

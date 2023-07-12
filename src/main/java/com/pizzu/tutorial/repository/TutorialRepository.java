@@ -3,6 +3,7 @@ package com.pizzu.tutorial.repository;
 import java.util.List;
 
 import com.pizzu.tutorial.model.Tutorial;
+import com.pizzu.tutorial.model.TutorialSpecification;
 
 public interface TutorialRepository {
 	List<Tutorial> getAllTutorial();
@@ -10,6 +11,7 @@ public interface TutorialRepository {
 	List<Tutorial> getAllPublishedTutorial();
 	List<Tutorial> getTutorialByTitle(String name);
 	Tutorial insertTutorial(Tutorial tutorial);
+	Tutorial insertSpecification(long id, TutorialSpecification specification);
 	Tutorial updateTutorial(Tutorial tutorial);
 	int deleteById(long id);
 	int deleteAllTutorial();

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pizzu.tutorial.model.Tutorial;
+import com.pizzu.tutorial.model.TutorialSpecification;
 import com.pizzu.tutorial.repository.*;
 
 import net.bytebuddy.asm.Advice.This;
@@ -80,6 +81,14 @@ public class TutorialServiceImpl implements TutorialService {
 	@Override
 	public int deleteAllTutorial() {
 		return tutorialRepository.deleteAllTutorial();
+	}
+
+
+	@Transactional
+	@Override
+	public Tutorial insertSpecification(long id, TutorialSpecification specification) {
+		
+		return tutorialRepository.insertSpecification(id, specification);
 	}
 	
 	
