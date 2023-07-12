@@ -63,7 +63,7 @@ public class TutorialController {
 	
 	@PutMapping
 	public ResponseEntity<Tutorial> putTutorial(@RequestBody Tutorial tutorial) {
-		return new ResponseEntity<Tutorial>(tutorialService.updateTutorial(tutorial), HttpStatus.CREATED);
+		return new ResponseEntity<Tutorial>(tutorialService.updateTutorial(tutorial), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")

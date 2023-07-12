@@ -15,13 +15,9 @@ import com.pizzu.tutorial.model.Tutorial;
 @Repository
 public class TutorialRepositoryImpl implements TutorialRepository {
 	
+	@PersistenceContext
 	private EntityManager entityManager;
 	
-	
-	@Autowired
-	public TutorialRepositoryImpl(EntityManager entityManager) {
-		this.entityManager = entityManager;
-	}
 
 	@Override
 	public List<Tutorial> getAllTutorial() {

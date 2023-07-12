@@ -1,6 +1,7 @@
 package com.pizzu.tutorial.service;
 
 import java.util.List;
+import java.util.logging.LogManager;
 
 import javax.transaction.Transactional;
 
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.pizzu.tutorial.model.Tutorial;
 import com.pizzu.tutorial.repository.*;
+
+import net.bytebuddy.asm.Advice.This;
+
 
 @Service
 public class TutorialServiceImpl implements TutorialService {
@@ -25,6 +29,7 @@ public class TutorialServiceImpl implements TutorialService {
 
 	@Override
 	public List<Tutorial> findAll() {
+		System.out.println(getClass().getPackage());
 		return tutorialRepository.getAllTutorial();
 	}
 
