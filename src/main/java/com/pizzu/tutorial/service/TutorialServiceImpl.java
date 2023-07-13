@@ -30,7 +30,6 @@ public class TutorialServiceImpl implements TutorialService {
 
 	@Override
 	public List<Tutorial> findAll() {
-		System.out.println(getClass().getPackage());
 		return tutorialRepository.getAllTutorial();
 	}
 

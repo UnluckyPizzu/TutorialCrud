@@ -63,7 +63,7 @@ public class TutorialController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Tutorial> postTutorial(@PathVariable long id, @RequestBody TutorialSpecification specification) {
+	public ResponseEntity<Tutorial> postSpecificationTutorial(@PathVariable long id, @RequestBody TutorialSpecification specification) {
 		return new ResponseEntity<Tutorial>(tutorialService.insertSpecification(id, specification), HttpStatus.CREATED);
 	}
 	

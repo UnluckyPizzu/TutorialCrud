@@ -79,7 +79,7 @@ public class TutorialRepositoryImpl implements TutorialRepository {
 	@Override
 	public Tutorial insertSpecification(long id, TutorialSpecification specification) {
 		Tutorial tutorial = entityManager.find(Tutorial.class, id);
-		//tutorial.setSpecification(specification);
+		tutorial.setSpecification(specification);
 		entityManager.merge(tutorial);
 		return tutorial;
 	}

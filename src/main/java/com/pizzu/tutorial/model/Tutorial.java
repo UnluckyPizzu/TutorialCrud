@@ -2,6 +2,7 @@ package com.pizzu.tutorial.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,9 +26,20 @@ public class Tutorial {
 	@Column(nullable = false)
 	private Boolean published;
 
-	/*
+
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "tutorial_id")
+	@JsonBackReference
+	@JoinColumn(name = "specification")
 	private TutorialSpecification specification;
-	*/
+
+
+	@Override
+	public String toString() {
+		return "Tutorial{" +
+				"id=" + id +
+				", title='" + title + '\'' +
+				", description='" + description + '\'' +
+				", published=" + published +
+				'}';
+	}
 }
