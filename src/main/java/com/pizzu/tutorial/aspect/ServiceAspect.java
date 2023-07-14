@@ -35,7 +35,7 @@ public class ServiceAspect {
 	@Pointcut("execution(* com.pizzu.tutorial.service.*.*(..))")
 	public void forServicePointcuts() {}
 	
-	@Before("forServicePointcuts()")
+	//@Before("forServicePointcuts()")
 	public void beforeLogging(JoinPoint jointPoint) {
 		
 		MethodSignature signature = (MethodSignature) jointPoint.getSignature();
@@ -50,7 +50,7 @@ public class ServiceAspect {
 		}
 	}
 	
-	@AfterReturning(pointcut = "forFindAllServicePointcuts()", returning = "tutorials")
+	//@AfterReturning(pointcut = "forFindAllServicePointcuts()", returning = "tutorials")
 	public void afterLogging(JoinPoint jointPoint, List<Tutorial> tutorials) {
 		
 		MethodSignature signature = (MethodSignature) jointPoint.getSignature();

@@ -5,6 +5,7 @@ import java.util.logging.LogManager;
 
 import javax.transaction.Transactional;
 
+import com.pizzu.tutorial.model.Platform;
 import com.pizzu.tutorial.model.Utente;
 import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,6 +106,18 @@ public class TutorialServiceImpl implements TutorialService {
 	@Override
 	public Tutorial insertSpecification(long id, TutorialSpecification specification) {
 		return tutorialRepository.insertSpecification(id, specification);
+	}
+
+	@Transactional
+	@Override
+	public Platform insertPlatform(long id, Platform platform) {
+		return tutorialRepository.insertPlatform(id,platform);
+	}
+
+	@Transactional
+	@Override
+	public Platform insertPlatform(long id, long id_platfomr) {
+		return tutorialRepository.insertPlatform(id,id_platfomr);
 	}
 
 	@Transactional

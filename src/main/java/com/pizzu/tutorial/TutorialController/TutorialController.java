@@ -4,8 +4,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.websocket.server.PathParam;
 import javax.xml.crypto.Data;
 
+import com.pizzu.tutorial.model.Platform;
 import com.pizzu.tutorial.model.Utente;
 import org.aspectj.weaver.NewConstructorTypeMunger;
 import org.hibernate.engine.query.spi.sql.NativeSQLQueryCollectionReturn;
@@ -85,6 +87,17 @@ public class TutorialController {
 	@PutMapping("/author/{id}")
 	public ResponseEntity<Tutorial> putAuthorTutorial(@PathVariable long id, @RequestBody Utente author) {
 		return new ResponseEntity<Tutorial>(tutorialService.insertAuthor(id, author), HttpStatus.CREATED);
+	}
+
+	@PutMapping("/platform/{id}")
+	public ResponseEntity<Platform> putPlatformTutorial(@PathVariable long id, @RequestBody Platform platform) {
+		return new ResponseEntity<Platform>(tutorialService.insertPlatform(id, platform), HttpStatus.CREATED);
+	}
+
+	@PutMapping("/platform")
+	public ResponseEntity<Platform> putPlatformTutorial(@RequestParam(name = "id") long id, @RequestParam(name = "id_platform")  long id_platform) {
+		System.out.println("prova");
+		return new ResponseEntity<Platform>(tutorialService.insertPlatform(id, id_platform), HttpStatus.CREATED);
 	}
 	
 	@PutMapping

@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.pizzu.tutorial.model.Platform;
 import com.pizzu.tutorial.model.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -93,6 +94,32 @@ public class TutorialRepositoryImpl implements TutorialRepository {
 
 		entityManager.merge(tutorial);
 		return tutorial;
+	}
+
+	@Override
+	public Platform insertPlatform(long id, Platform platform) {
+		Tutorial tutorial = entityManager.find(Tutorial.class,id);
+
+		tutorial.getPlatforms().add(platform);
+
+		entityManager.merge(tutorial);
+
+
+		System.out.println(tutorial.toString() + tutorial.getPlatforms());
+		return platform;
+	}
+
+	@Override
+	public Platform insertPlatform(long id, long id_platform) {
+		Tutorial tutorial = entityManager.find(Tutorial.class,id);
+		Platform platform = entityManager.find(Platform.class,id_platform);
+
+		tutorial.getPlatforms().add(platform);
+		entityManager.merge(tutorial);
+
+
+		System.out.println(platform.toString() + platform.getTutorials());
+		return platform;
 	}
 
 

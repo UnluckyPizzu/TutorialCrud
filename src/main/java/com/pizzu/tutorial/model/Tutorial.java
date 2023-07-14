@@ -4,7 +4,11 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "tutorial")
@@ -42,4 +46,14 @@ public class Tutorial {
 				", published=" + published +
 				'}';
 	}
+
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "tutorial_platform",
+			joinColumns = @JoinColumn(name = "id_tutorial"),
+			inverseJoinColumns = @JoinColumn(name = "id_platform")
+	)
+	Set<Platform> platforms;
 }
