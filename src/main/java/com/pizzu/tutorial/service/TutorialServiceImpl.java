@@ -5,14 +5,16 @@ import java.util.logging.LogManager;
 
 import javax.transaction.Transactional;
 
+import com.pizzu.tutorial.model.Utente;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.RequestScope;
 
 import com.pizzu.tutorial.model.Tutorial;
 import com.pizzu.tutorial.model.TutorialSpecification;
 import com.pizzu.tutorial.repository.*;
 
-import net.bytebuddy.asm.Advice.This;
 
 
 @Service
@@ -36,7 +38,18 @@ public class TutorialServiceImpl implements TutorialService {
 
 
 	@Override
-	public Tutorial findTutorialById(long id) {
+	public synchronized Tutorial findTutorialById(long id) {
+		
+		if(id == 7) {
+			try {
+				Thread.sleep(100000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
 		return tutorialRepository.getTutorialById(id);
 	}
 
@@ -69,10 +82,15 @@ public class TutorialServiceImpl implements TutorialService {
 	}
 
 
-	@Transactional
+	@Transactional(rollbackOn = Exception.class)
 	@Override
-	public int deleteTutorialById(long id) {
-		return tutorialRepository.deleteById(id);
+	public int deleteTutorialById(long id) throws Exception {
+		int del = tutorialRepository.deleteById(id);
+		/*
+		if(del == 1)
+			throw new Exception("Exception message");
+		 */
+		return del;
 	}
 
 
@@ -86,10 +104,14 @@ public class TutorialServiceImpl implements TutorialService {
 	@Transactional
 	@Override
 	public Tutorial insertSpecification(long id, TutorialSpecification specification) {
-		
 		return tutorialRepository.insertSpecification(id, specification);
 	}
-	
-	
+
+	@Transactional
+	@Override
+	public Tutorial insertAuthor(long id, Utente author) {
+		return tutorialRepository.insertAuthor(id,author);
+	}
+
 
 }

@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.pizzu.tutorial.model.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -84,6 +85,15 @@ public class TutorialRepositoryImpl implements TutorialRepository {
 		return tutorial;
 	}
 
-	
-	
+	@Override
+	public Tutorial insertAuthor(long id, Utente author) {
+		Tutorial tutorial = entityManager.find(Tutorial.class, id);
+		TutorialSpecification specification = tutorial.getSpecification();
+		specification.setAuthor(author);
+
+		entityManager.merge(tutorial);
+		return tutorial;
+	}
+
+
 }

@@ -3,6 +3,7 @@ package com.pizzu.tutorial.aspect;
 import java.util.List;
 
 import com.pizzu.tutorial.Config;
+import com.pizzu.tutorial.TutorialController.TutorialController;
 import com.pizzu.tutorial.model.Persona;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -10,6 +11,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
@@ -60,19 +63,34 @@ public class ServiceAspect {
 		}
 	}
 
+	
+	@Autowired
+	@Qualifier("persona1")
+	private Persona persona1;
+	
+	@Autowired
+	@Qualifier("persona2")
+	private Persona persona2;
+
 	@Before("forFindEndpointsPointcuts()")
 	public void logPersonaBeforeFind() {
+		/*
 		ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
 
 		Persona persona1 = context.getBean("persona1",Persona.class);
+		*/
 		System.out.println(persona1.toString());
 	}
 
 	@Before("forDeleteEndpointsPointcuts()")
 	public void logPersonaBeforeDelete() {
+		/*
 		ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
 
 		Persona persona2 = context.getBean("persona2",Persona.class);
+		 */
+		
+		
 		System.out.println(persona2.toString());
 	}
 

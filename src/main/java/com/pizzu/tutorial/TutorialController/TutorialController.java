@@ -1,13 +1,20 @@
 package com.pizzu.tutorial.TutorialController;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.xml.crypto.Data;
+
+import com.pizzu.tutorial.model.Utente;
 import org.aspectj.weaver.NewConstructorTypeMunger;
 import org.hibernate.engine.query.spi.sql.NativeSQLQueryCollectionReturn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.annotation.RequestScope;
 
 import com.pizzu.tutorial.model.Tutorial;
 import com.pizzu.tutorial.model.TutorialSpecification;
@@ -25,6 +34,8 @@ import com.pizzu.tutorial.service.TutorialService;
 @RestController
 @RequestMapping("/tutorials")
 public class TutorialController {
+	
+	private final Date date = new Date();
 
 	private TutorialService tutorialService;
 
@@ -35,11 +46,15 @@ public class TutorialController {
 	
 	@GetMapping("")
 	public ResponseEntity<List<Tutorial>> findAll(@RequestParam(required = false, name = "title") String name) {
+		System.out.println(date.toString());
+		
+		
 		if(name == null)
 			return new ResponseEntity<List<Tutorial>>(tutorialService.findAll(), HttpStatus.OK);
 		else {
 			return new ResponseEntity<List<Tutorial>>(tutorialService.findTutorialByTitle(name), HttpStatus.OK);
 		}
+		
 	}
 	
 	@GetMapping("/{id}")
@@ -63,8 +78,13 @@ public class TutorialController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Tutorial> postSpecificationTutorial(@PathVariable long id, @RequestBody TutorialSpecification specification) {
+	public ResponseEntity<Tutorial> putSpecificationTutorial(@PathVariable long id, @RequestBody TutorialSpecification specification) {
 		return new ResponseEntity<Tutorial>(tutorialService.insertSpecification(id, specification), HttpStatus.CREATED);
+	}
+
+	@PutMapping("/author/{id}")
+	public ResponseEntity<Tutorial> putAuthorTutorial(@PathVariable long id, @RequestBody Utente author) {
+		return new ResponseEntity<Tutorial>(tutorialService.insertAuthor(id, author), HttpStatus.CREATED);
 	}
 	
 	@PutMapping
@@ -73,7 +93,7 @@ public class TutorialController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Integer> deleteTutorialById(@PathVariable long id) {
+	public ResponseEntity<Integer> deleteTutorialById(@PathVariable long id) throws Exception {
 		return new ResponseEntity<Integer>(tutorialService.deleteTutorialById(id), HttpStatus.OK);
 	}
 	

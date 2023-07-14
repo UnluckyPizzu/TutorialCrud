@@ -5,6 +5,7 @@ import com.pizzu.tutorial.model.Persona;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 @Configuration
 @ComponentScan(basePackageClasses = Persona.class)
@@ -15,7 +16,7 @@ public class Config {
         return new Persona("Mario", "Rossi");
     }
 
-    @Bean("persona2")
+    @Bean(name = "persona2")
     public Persona getPersona2 () {
         return new Persona("Luigi", "Verdi");
     }
